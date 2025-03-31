@@ -29,7 +29,6 @@ class MultiDictionary:
         for word in words:
             word = word.lower()
             found = False
-            richW = rw.RichWord(word)
             if language == "english":
                 if self._english.dict.__contains__(word):
                     found = True
@@ -39,9 +38,9 @@ class MultiDictionary:
             elif language == "spanish":
                 if self._spanish.dict.__contains__(word):
                     found = True
-            if (found):
-                richW.corretta = True
 
+            richW = rw.RichWord(word)
+            richW.corretta = found
             parole.append(richW)
 
         return parole

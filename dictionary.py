@@ -1,3 +1,4 @@
+#la mia Class Dictionary
 class Dictionary:
     def __init__(self, dict=[], language = ""):
         self._dict = dict

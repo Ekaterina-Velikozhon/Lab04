@@ -15,6 +15,7 @@ class View(object):
 
         # define the UI elements and populate the page
 
+
     def add_content(self):
         """Function that creates and adds the visual elements to the page. It also updates
         the page accordingly."""
@@ -27,15 +28,35 @@ class View(object):
         )
 
         # Add your stuff here
+        #ROW1
+        self._ddLingua = ft.Dropdown(label="Select language",
+                         options=[ft.dropdown.Option("italian"), ft.dropdown.Option("english"), ft.dropdown.Option("spanish")],
+                         on_change=self.__controller.handleVerificaLingua,
+                         width=self.page.width)#aggiorna output in base alla scelta
 
-        self.page.add([])
+        #ROW2
+        self._ddTipoRicerca = ft.Dropdown(label="Search Modality",
+                                          options=[ft.dropdown.Option("Default"), ft.dropdown.Option("Linear"), ft.dropdown.Option("Dicotomic")],
+                                          on_change=self.__controller.handleVerificaTipoRicerca,
+                                          width=200)
+        self._txtIn = ft.TextField(label="Add your sentence here", width=460)
+        self._btnSpellCheck = ft.ElevatedButton(text="Spell Check",
+                                                on_click=self.__controller.handleSpellCheck)
+        row2 = ft.Row(controls=[self._ddTipoRicerca, self._txtIn, self._btnSpellCheck],
+                      alignment=ft.MainAxisAlignment.CENTER,
+                      )
 
-        self.page.update()
+        #ROW3
+        self._txtOut = ft.ListView(expand=True, spacing=10)
+
+        self.page.add(self._ddLingua, row2, self._txtOut)
 
     def update(self):
         self.page.update()
+
     def setController(self, controller):
         self.__controller = controller
+
     def theme_changed(self, e):
         """Function that changes the color theme of the app, when the corresponding
         switch is triggered"""
